@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AppSight.FileHashChecker.Command;
-using AppSight.FileHashChecker.Security;
+using AppSight.FileHashChecker.Library.Command;
+using AppSight.FileHashChecker.Library.Security;
 
-namespace AppSight.FileHashChecker
+namespace AppSight.FileHashChecker.WindowsForm
 {
     public partial class Form1 : Form
     {

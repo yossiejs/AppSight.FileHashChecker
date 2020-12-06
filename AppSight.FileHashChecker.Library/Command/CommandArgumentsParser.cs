@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AppSight.FileHashChecker.Security;
+using AppSight.FileHashChecker.Library.Security;
 
 namespace AppSight.FileHashChecker.Library.Command
 {
@@ -32,7 +32,7 @@ namespace AppSight.FileHashChecker.Library.Command
                 }
                 else
                 {
-                    var option = arg.Split("=");
+                    var option = arg.Split('=');
 
                     if (option.Length <= 1)
                     {

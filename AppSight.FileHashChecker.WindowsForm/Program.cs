@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AppSight.FileHashChecker.Library.Command;
+using AppSight.FileHashChecker.Library.Security;
 
-namespace AppSight.FileHashChecker
+namespace AppSight.FileHashChecker.WindowsForm
 {
     static class Program
     {

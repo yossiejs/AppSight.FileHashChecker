@@ -6,4 +6,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AppSight.FileHashChecker.Library\AppSight.FileHashChecker.Library.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿using AppSight.FileHashChecker.Security;
+﻿using AppSight.FileHashChecker.Library.Security;
 
 namespace AppSight.FileHashChecker.Library.Command
 {

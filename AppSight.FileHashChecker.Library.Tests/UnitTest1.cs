@@ -3,7 +3,7 @@ using Xunit;
 
 namespace AppSight.FileHashChecker.Library.Tests
 {
-    public class CommandArgumentsParserTest
+    public class UnitTest1
     {
         [Fact]
         public void Test1()
