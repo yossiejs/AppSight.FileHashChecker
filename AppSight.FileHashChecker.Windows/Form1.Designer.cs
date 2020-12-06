@@ -1,5 +1,5 @@
 ﻿
-namespace AppSight.FileHashChecker.WindowsForm
+namespace AppSight.FileHashChecker.Windows
 {
     partial class Form1
     {

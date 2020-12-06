@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using AppSight.FileHashChecker.Library.Command;
 using AppSight.FileHashChecker.Library.Security;
 
-namespace AppSight.FileHashChecker.WindowsForm
+namespace AppSight.FileHashChecker.Windows
 {
     public partial class Form1 : Form
     {

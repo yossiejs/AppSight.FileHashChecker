@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppSight.FileHashChecker.WindowsForm", "AppSight.FileHashChecker.WindowsForm\AppSight.FileHashChecker.WindowsForm.csproj", "{6B775515-ED4A-40E2-8E15-BEBDE5E04B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppSight.FileHashChecker.Windows", "AppSight.FileHashChecker.Windows\AppSight.FileHashChecker.Windows.csproj", "{6B775515-ED4A-40E2-8E15-BEBDE5E04B8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppSight.FileHashChecker.Library.Tests", "AppSight.FileHashChecker.Library.Tests\AppSight.FileHashChecker.Library.Tests.csproj", "{F3F554CD-24CA-4CEA-86D9-B59B1B4E5BFF}"
 EndProject
