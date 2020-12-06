@@ -23,4 +23,13 @@
     <ProjectReference Include="..\AppSight.FileHashChecker.Library\AppSight.FileHashChecker.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="tux.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="tux.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

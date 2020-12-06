@@ -10,10 +10,8 @@ namespace AppSight.FileHashChecker.Library.Command
     {
         public CommandArguments Parse(string[] args)
         {
-            if (args.Length <= 1)
-            {
-                throw new ArgumentException("Required options are not specified.");
-            }
+            if (args == null) { throw new ArgumentNullException(nameof(args)); }
+            if (args.Length <= 1) { throw new ArgumentException("Required options are not specified."); }
 
             var commandArguments = new CommandArguments
             {
