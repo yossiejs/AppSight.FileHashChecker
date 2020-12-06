@@ -48,7 +48,7 @@ namespace AppSight.FileHashChecker.Library.Security
                         }
 
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new ArgumentOutOfRangeException(nameof(hashType));
                 }
             }
         }
