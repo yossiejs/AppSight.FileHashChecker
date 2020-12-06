@@ -45,7 +45,7 @@ namespace AppSight.FileHashChecker.Windows
                 .Replace("%HashType%", fileHash.HashType.ToString())
                 .Replace("%HashString%", fileHash.ComputedHash.ToHashString())
                 .Replace("%FilePath%", fileHash.Path)
-                .Replace("%ConfirmationString%", "Whould you like to copy hash to clipboard?"); // TODO: support locale
+                .Replace("%ConfirmationString%", "Would you like to copy hash to clipboard?"); // TODO: support locale
             var dialogResult = MessageBox.Show(
                 resultMessageBody,
                 Text,
@@ -56,6 +56,8 @@ namespace AppSight.FileHashChecker.Windows
             {
                 MessageBox.Show("TODO: impl copy to clipboard!");
             }
+
+            Application.Exit();
         }
 
         private void Minimize()
