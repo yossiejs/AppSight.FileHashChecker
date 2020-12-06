@@ -14,7 +14,7 @@ namespace AppSight.FileHashChecker.Windows
 {
     public partial class Form1 : Form
     {
-        private string _confirmMessageBodyTemplate { get; } = "" +
+        private string _resultMessageBodyTemplate { get; } = "" +
             "%HashType%: %HashString%\r\n" +
             "Path: %FilePath%\r\n" +
             "\r\n" +
@@ -41,13 +41,13 @@ namespace AppSight.FileHashChecker.Windows
                 commandArguments.Options.FilePath,
                 commandArguments.Options.HashType);
 
-            var messageBody = _confirmMessageBodyTemplate
+            var resultMessageBody = _resultMessageBodyTemplate
                 .Replace("%HashType%", fileHash.HashType.ToString())
                 .Replace("%HashString%", fileHash.ComputedHash.ToHashString())
                 .Replace("%FilePath%", fileHash.Path)
                 .Replace("%ConfirmationString%", "Whould you like to copy hash to clipboard?"); // TODO: support locale
             var dialogResult = MessageBox.Show(
-                messageBody,
+                resultMessageBody,
                 Text,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information);
