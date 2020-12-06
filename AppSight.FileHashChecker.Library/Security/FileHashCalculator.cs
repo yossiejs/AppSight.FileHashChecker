@@ -4,6 +4,7 @@
     {
         public FileHash Calculate(string filePath, HashType hashType)
         {
+
             return new FileHash
             {
                 HashType = hashType,
