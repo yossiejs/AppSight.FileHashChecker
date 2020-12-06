@@ -48,7 +48,7 @@ namespace AppSight.FileHashChecker.Library.Security
                         }
 
                     default:
-                        throw new InvalidOperationException($"Specified unknown hash type. hashType={hashType}");
+                        throw new ArgumentOutOfRangeException();
                 }
             }
         }
