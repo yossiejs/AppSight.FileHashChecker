@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AppSight.FileHashChecker.Security;
 
 namespace AppSight.FileHashChecker.Command
 {
     public class CommandOptions
     {
-        public string HashType { get; set; }
+        public string FilePath { get; set; }
+        public HashType HashType { get; set; }
     }
 }
