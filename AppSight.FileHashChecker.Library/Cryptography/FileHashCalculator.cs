@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace AppSight.FileHashChecker.Library.Security
+namespace AppSight.FileHashChecker.Library.Cryptography
 {
     public class FileHashCalculator
     {

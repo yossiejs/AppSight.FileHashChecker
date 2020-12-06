@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AppSight.FileHashChecker.Library.Security
+namespace AppSight.FileHashChecker.Library.Cryptography
 {
     public static class BytesExtensions
     {

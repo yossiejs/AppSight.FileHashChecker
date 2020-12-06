@@ -1,6 +1,6 @@
 using System;
 using AppSight.FileHashChecker.Library.Command;
-using AppSight.FileHashChecker.Library.Security;
+using AppSight.FileHashChecker.Library.Cryptography;
 using Xunit;
 
 namespace AppSight.FileHashChecker.Library.Tests

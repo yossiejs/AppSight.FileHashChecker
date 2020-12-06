@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using AppSight.FileHashChecker.Library.Security;
+using AppSight.FileHashChecker.Library.Cryptography;
 
 namespace AppSight.FileHashChecker.Library.Command
 {
