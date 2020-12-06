@@ -3,10 +3,10 @@ using Xunit;
 
 namespace AppSight.FileHashChecker.Library.Tests
 {
-    public class UnitTest1
+    public class FileHashCalculatorTest
     {
         [Fact]
-        public void Test1()
+        public void TestCalculate()
         {
 
         }

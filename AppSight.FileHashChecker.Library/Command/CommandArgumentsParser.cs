@@ -16,7 +16,7 @@ namespace AppSight.FileHashChecker.Library.Command
                     "Required options are not specified.\r\n" +
                     "\r\n" +
                     "e.g.\r\n" +
-                    "AppSight.FileHashChecker.exe C:\\WINDOWS\\system32\\notepad.exe -a=md5");
+                    "AppSight.FileHashChecker.exe -f C:\\path\\to\\notepad.exe -t md5");
             }
 
             var commandArguments = new CommandArguments
@@ -24,25 +24,37 @@ namespace AppSight.FileHashChecker.Library.Command
                 Options = new CommandOptions(),
             };
 
+            string currentOptionName = String.Empty;
+
             foreach (var (arg, index) in args.Select((arg, index) => (arg, index)))
             {
                 if (index == 0)
                 {
                     commandArguments.ExePath = arg;
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(currentOptionName))
+                {
+                    currentOptionName = arg;
+
+                    switch (currentOptionName)
+                    {
+                        case CommandArgumentsOptionNames.FilePath:
+                        case CommandArgumentsOptionNames.FilePathShort:
+                        case CommandArgumentsOptionNames.HashType:
+                        case CommandArgumentsOptionNames.HashTypeShort:
+                            break;
+
+                        default:
+                            throw new ArgumentException($"Unknown option name. optionName={currentOptionName}");
+                    }
                 }
                 else
                 {
-                    var option = arg.Split('=');
+                    var optionValue = arg;
 
-                    if (option.Length <= 1)
-                    {
-                        throw new ArgumentException($"Invalid arguments format. arg={arg}");
-                    }
-
-                    var optionName = option[0];
-                    var optionValue = option[1];
-
-                    switch (optionName)
+                    switch (currentOptionName)
                     {
                         case CommandArgumentsOptionNames.FilePath:
                         case CommandArgumentsOptionNames.FilePathShort:
@@ -59,14 +71,13 @@ namespace AppSight.FileHashChecker.Library.Command
                             }
                             else
                             {
-                                throw new ArgumentException($"Invalid option value. optionName={optionName}, optionValue={optionValue}");
+                                throw new ArgumentException($"Invalid option value. optionName={currentOptionName}, optionValue={optionValue}");
                             }
-                            
-                            break;
 
-                        default:
-                            throw new ArgumentException($"Unknown option name. optionName={optionName}");
+                            break;
                     }
+
+                    currentOptionName = String.Empty;
                 }
             }
 
