@@ -1,6 +1,6 @@
 ﻿using AppSight.FileHashChecker.Security;
 
-namespace AppSight.FileHashChecker.Command
+namespace AppSight.FileHashChecker.Library.Command
 {
     public class CommandOptions
     {

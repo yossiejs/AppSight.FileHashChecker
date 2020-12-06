@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using AppSight.FileHashChecker.Security;
 
-namespace AppSight.FileHashChecker.Command
+namespace AppSight.FileHashChecker.Library.Command
 {
     public class CommandArgumentsParser
     {
@@ -16,7 +16,7 @@ namespace AppSight.FileHashChecker.Command
                     "Required options are not specified.\r\n" +
                     "\r\n" +
                     "e.g.\r\n" +
-                    "-f=C:\\WINDOWS\\system32\\notepad.exe -a=md5");
+                    "AppSight.FileHashChecker.exe C:\\WINDOWS\\system32\\notepad.exe -a=md5");
             }
 
             var commandArguments = new CommandArguments

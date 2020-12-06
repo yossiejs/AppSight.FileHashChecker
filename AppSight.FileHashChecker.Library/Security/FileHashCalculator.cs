@@ -1,4 +1,4 @@
-﻿namespace AppSight.FileHashChecker.Security
+﻿namespace AppSight.FileHashChecker.Library.Security
 {
     public class FileHashCalculator
     {
