@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "AppSight.FileHashChecker.Windows": {
+      "commandName": "Project",
+      "commandLineArgs": "-f \"C:\\WINDOWS\\System32\\notepad.exe\" -t md5"
+    }
+  }
+}
