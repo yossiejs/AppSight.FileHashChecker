@@ -32,10 +32,10 @@ namespace AppSight.FileHashChecker.WindowsForm
             Text = $"{Application.ProductName} {Application.ProductVersion}";
             string[] args = Environment.GetCommandLineArgs();
             var commandArguments = _commandArgumentsParser.Parse(args);
-
-            var fileHash = _fileHashCalculator.Calculate(commandArguments.Options.FilePath, commandArguments.Options.HashType);
-
-            MessageBox.Show(string.Join(",", args));
+            var fileHash = _fileHashCalculator.Calculate(
+                commandArguments.Options.FilePath,
+                commandArguments.Options.HashType);
+            MessageBox.Show(fileHash.Path);
         }
 
         private void Minimize()

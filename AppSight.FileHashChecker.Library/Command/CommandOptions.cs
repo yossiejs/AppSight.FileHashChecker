@@ -6,5 +6,6 @@ namespace AppSight.FileHashChecker.Library.Command
     {
         public string FilePath { get; set; }
         public HashType HashType { get; set; }
+        public bool Help { get; set; }
     }
 }

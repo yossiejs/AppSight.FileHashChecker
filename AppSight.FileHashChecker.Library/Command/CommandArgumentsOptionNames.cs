@@ -10,5 +10,7 @@ namespace AppSight.FileHashChecker.Library.Command
         public const string FilePath = "--filepath";
         public const string HashTypeShort = "-t";
         public const string HashType = "--type";
+        public const string HelpShort = "-h";
+        public const string Help = "--help";
     }
 }

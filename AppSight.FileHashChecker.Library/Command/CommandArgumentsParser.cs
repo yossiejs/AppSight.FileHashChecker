@@ -12,11 +12,7 @@ namespace AppSight.FileHashChecker.Library.Command
         {
             if (args.Length <= 1)
             {
-                throw new ArgumentException(
-                    "Required options are not specified.\r\n" +
-                    "\r\n" +
-                    "e.g.\r\n" +
-                    "AppSight.FileHashChecker.exe -f C:\\path\\to\\notepad.exe -t md5");
+                throw new ArgumentException("Required options are not specified.");
             }
 
             var commandArguments = new CommandArguments
@@ -44,6 +40,12 @@ namespace AppSight.FileHashChecker.Library.Command
                         case CommandArgumentsOptionNames.FilePathShort:
                         case CommandArgumentsOptionNames.HashType:
                         case CommandArgumentsOptionNames.HashTypeShort:
+                            break;
+
+                        case CommandArgumentsOptionNames.Help:
+                        case CommandArgumentsOptionNames.HelpShort:
+                            commandArguments.Options.Help = true;
+                            currentOptionName = String.Empty;
                             break;
 
                         default:
