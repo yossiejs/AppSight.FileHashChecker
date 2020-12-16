@@ -15,8 +15,8 @@ namespace AppSight.FileHashChecker.Windows
     public partial class Form1 : Form
     {
         private string _resultMessageBodyTemplate { get; } = "" +
-            "%HashType%: %HashString%\r\n" +
-            "Path: %FilePath%\r\n" +
+            "Hash(%HashType%): %HashString%\r\n" +
+            "FilePath: %FilePath%\r\n" +
             "\r\n" +
             "%ConfirmationString%";
         private CommandArgumentsParser _commandArgumentsParser { get; }
@@ -41,9 +41,10 @@ namespace AppSight.FileHashChecker.Windows
                 commandArguments.Options.FilePath,
                 commandArguments.Options.HashType);
 
+            var fileHashString = fileHash.ComputedHash.ToHashString();
             var resultMessageBody = _resultMessageBodyTemplate
                 .Replace("%HashType%", fileHash.HashType.ToString())
-                .Replace("%HashString%", fileHash.ComputedHash.ToHashString())
+                .Replace("%HashString%", fileHashString)
                 .Replace("%FilePath%", fileHash.Path)
                 .Replace("%ConfirmationString%", "Would you like to copy hash to clipboard?"); // TODO: support locale
             var dialogResult = MessageBox.Show(
@@ -54,7 +55,12 @@ namespace AppSight.FileHashChecker.Windows
 
             if (dialogResult == DialogResult.Yes)
             {
-                MessageBox.Show("TODO: impl copy to clipboard!");
+                Clipboard.SetData(DataFormats.Text, fileHashString);
+                MessageBox.Show(
+                    "Copied!",
+                    Text,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
 
             Application.Exit();
