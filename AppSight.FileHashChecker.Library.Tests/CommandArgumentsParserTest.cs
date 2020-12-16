@@ -16,7 +16,7 @@ namespace AppSight.FileHashChecker.Library.Tests
 
             Assert.Equal("C:\\path\\to\\AppSight.FileHashChecker.exe", commandArguments.ExePath);
             Assert.Equal("C:\\path\\to\\note.txt", commandArguments.Options.FilePath);
-            Assert.Equal(HashType.SHA1, commandArguments.Options.HashType);
+            Assert.Equal(HashType.SHA512, commandArguments.Options.HashType);
             Assert.True(commandArguments.Options.Help);
         }
     }
