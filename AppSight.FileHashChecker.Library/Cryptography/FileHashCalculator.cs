@@ -12,44 +12,36 @@ namespace AppSight.FileHashChecker.Library.Cryptography
 
             using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
+                byte[] hashBytes;
+
                 switch (hashType)
                 {
                     case HashType.MD5:
-                        {
-                            var hashBytes = MD5.Create().ComputeHash(fileStream);
-                            return new FileHash
-                            {
-                                HashType = hashType,
-                                ComputedHash = hashBytes,
-                                Path = filePath,
-                            };
-                        }
+                        hashBytes = MD5.Create().ComputeHash(fileStream);
+                        break;
 
                     case HashType.SHA1:
-                        {
-                            var hashBytes = SHA1.Create().ComputeHash(fileStream);
-                            return new FileHash
-                            {
-                                HashType = hashType,
-                                ComputedHash = hashBytes,
-                                Path = filePath,
-                            };
-                        }
+                        hashBytes = SHA1.Create().ComputeHash(fileStream);
+                        break;
 
                     case HashType.SHA256:
-                        {
-                            var hashBytes = SHA256.Create().ComputeHash(fileStream);
-                            return new FileHash
-                            {
-                                HashType = hashType,
-                                ComputedHash = hashBytes,
-                                Path = filePath,
-                            };
-                        }
+                        hashBytes = SHA256.Create().ComputeHash(fileStream);
+                        break;
+
+                    case HashType.SHA512:
+                        hashBytes = SHA512.Create().ComputeHash(fileStream);
+                        break;
 
                     default:
                         throw new ArgumentOutOfRangeException(nameof(hashType));
                 }
+
+                return new FileHash
+                {
+                    HashType = hashType,
+                    ComputedHash = hashBytes,
+                    Path = filePath,
+                };
             }
         }
     }

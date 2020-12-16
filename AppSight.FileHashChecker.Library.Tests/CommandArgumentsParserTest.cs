@@ -11,7 +11,7 @@ namespace AppSight.FileHashChecker.Library.Tests
         public void TestParse()
         {
             var parser = new CommandArgumentsParser();
-            var args = new[] { "C:\\path\\to\\AppSight.FileHashChecker.exe", "-h", "-f", "C:\\path\\to\\note.txt", "-t", "sha1" };
+            var args = new[] { "C:\\path\\to\\AppSight.FileHashChecker.exe", "-h", "-f", "C:\\path\\to\\note.txt", "-t", "sha512" };
             var commandArguments = parser.Parse(args);
 
             Assert.Equal("C:\\path\\to\\AppSight.FileHashChecker.exe", commandArguments.ExePath);
