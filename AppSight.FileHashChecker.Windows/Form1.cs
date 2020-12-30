@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AppSight.Extensions.System;
 using AppSight.FileHashChecker.Library.Command;
-using AppSight.FileHashChecker.Library.Cryptography;
+using AppSight.Security.Cryptography;
 
 namespace AppSight.FileHashChecker.Windows
 {
