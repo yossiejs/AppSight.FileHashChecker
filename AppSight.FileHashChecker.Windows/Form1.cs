@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,7 +21,7 @@ namespace AppSight.FileHashChecker.Windows
             "Hash(%HashType%): %HashString%\r\n" +
             "FilePath: %FilePath%\r\n" +
             "\r\n" +
-            "%ConfirmationString%";
+            "%Message%";
         private CommandArgumentsParser _commandArgumentsParser { get; }
         private FileHashCalculator _fileHashCalculator { get; }
 
@@ -38,16 +40,17 @@ namespace AppSight.FileHashChecker.Windows
             Text = $"{Application.ProductName} {Application.ProductVersion}";
             var args = Environment.GetCommandLineArgs();
             var commandArguments = _commandArgumentsParser.Parse(args);
+            var resourceManager = new ResourceManager(typeof(Form1));
+
             var fileHash = _fileHashCalculator.Calculate(
                 commandArguments.Options.FilePath,
                 commandArguments.Options.HashType);
-
             var fileHashString = fileHash.ComputedHash.ToHashString();
             var resultMessageBody = _resultMessageBodyTemplate
                 .Replace("%HashType%", fileHash.HashType.ToString())
                 .Replace("%HashString%", fileHashString)
                 .Replace("%FilePath%", fileHash.Path)
-                .Replace("%ConfirmationString%", "Would you like to copy hash to clipboard?"); // TODO: support locale
+                .Replace("%Message%", resourceManager.GetString("ComputedHashMessage")); // TODO: support locale
             var dialogResult = MessageBox.Show(
                 resultMessageBody,
                 Text,
@@ -58,7 +61,7 @@ namespace AppSight.FileHashChecker.Windows
             {
                 Clipboard.SetData(DataFormats.Text, fileHashString);
                 MessageBox.Show(
-                    "Copied!",
+                    resourceManager.GetString("CopiedMessage"),
                     Text,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
