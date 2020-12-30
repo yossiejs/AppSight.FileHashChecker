@@ -9,6 +9,8 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
 using AppSight.Extensions.System;
 using AppSight.FileHashChecker.Library.Command;
 using AppSight.Security.Cryptography;
@@ -18,8 +20,11 @@ namespace AppSight.FileHashChecker.Windows
     public partial class Form1 : Form
     {
         private string _resultMessageBodyTemplate { get; } = "" +
-            "Hash(%HashType%): %HashString%\r\n" +
-            "FilePath: %FilePath%\r\n" +
+            "Hash(%HashType%):\r\n" +
+            "%HashString%\r\n" +
+            "\r\n" +
+            "FilePath:\r\n" +
+            "%FilePath%\r\n" +
             "\r\n" +
             "%Message%";
         private CommandArgumentsParser _commandArgumentsParser { get; }
@@ -31,6 +36,8 @@ namespace AppSight.FileHashChecker.Windows
         {
             _commandArgumentsParser = commandArgumentsParser ?? throw new ArgumentNullException(nameof(commandArgumentsParser));
             _fileHashCalculator = fileHashCaluculator ?? throw new ArgumentNullException(nameof(fileHashCaluculator));
+            // for debugging localization
+            // Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP");
             InitializeComponent();
         }
 
@@ -50,7 +57,7 @@ namespace AppSight.FileHashChecker.Windows
                 .Replace("%HashType%", fileHash.HashType.ToString())
                 .Replace("%HashString%", fileHashString)
                 .Replace("%FilePath%", fileHash.Path)
-                .Replace("%Message%", resourceManager.GetString("ComputedHashMessage")); // TODO: support locale
+                .Replace("%Message%", resourceManager.GetString("ComputedHashMessage"));
             var dialogResult = MessageBox.Show(
                 resultMessageBody,
                 Text,
