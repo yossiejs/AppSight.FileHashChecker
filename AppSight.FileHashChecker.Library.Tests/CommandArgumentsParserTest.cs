@@ -1,4 +1,3 @@
-using System;
 using AppSight.FileHashChecker.Library.Command;
 using AppSight.Security.Cryptography;
 using Xunit;

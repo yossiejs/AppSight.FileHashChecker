@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppSight.FileHashChecker.Library.Command
+﻿namespace AppSight.FileHashChecker.Library.Command
 {
     public static class CommandArgumentsOptionNames
     {
