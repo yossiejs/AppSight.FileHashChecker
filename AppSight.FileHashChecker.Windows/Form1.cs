@@ -10,7 +10,7 @@ namespace AppSight.FileHashChecker.Windows
     public partial class Form1 : Form
     {
         private string _resultMessageBodyTemplate { get; } = "" +
-            "Hash(%HashType%):\r\n" +
+            "%HashType%:\r\n" +
             "%HashString%\r\n" +
             "\r\n" +
             "FilePath:\r\n" +
