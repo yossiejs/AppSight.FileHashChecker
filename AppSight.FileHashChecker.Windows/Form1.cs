@@ -72,5 +72,10 @@ namespace AppSight.FileHashChecker.Windows
             WindowState = FormWindowState.Minimized;
             ShowInTaskbar = false;
         }
+
+        private async void HasNewRelease()
+        {
+
+        }
     }
 }
