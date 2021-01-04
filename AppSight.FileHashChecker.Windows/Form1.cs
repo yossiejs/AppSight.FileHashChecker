@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http;
 using System.Resources;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using AppSight.Extensions.System;
 using AppSight.FileHashChecker.Library.Command;
@@ -19,13 +21,17 @@ namespace AppSight.FileHashChecker.Windows
             "%Message%";
         private CommandArgumentsParser _commandArgumentsParser { get; }
         private FileHashCalculator _fileHashCalculator { get; }
+        private HttpClient _httpClient { get; }
+        private IGitHubRepositoryReleaseProvider _gitHubRepositoryReleaseProvider { get; }
 
         public Form1(
             CommandArgumentsParser commandArgumentsParser,
-            FileHashCalculator fileHashCaluculator)
+            FileHashCalculator fileHashCaluculator,
+            IGitHubRepositoryReleaseProvider gitHubRepositoryReleaseProvider)
         {
             _commandArgumentsParser = commandArgumentsParser ?? throw new ArgumentNullException(nameof(commandArgumentsParser));
             _fileHashCalculator = fileHashCaluculator ?? throw new ArgumentNullException(nameof(fileHashCaluculator));
+            _gitHubRepositoryReleaseProvider = gitHubRepositoryReleaseProvider ?? throw new ArgumentNullException(nameof(gitHubRepositoryReleaseProvider));
             // for debugging localization
             // Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP");
             InitializeComponent();
@@ -73,7 +79,7 @@ namespace AppSight.FileHashChecker.Windows
             ShowInTaskbar = false;
         }
 
-        private async void IsAvailableNewRelease()
+        private async Task<bool> IsAvailableNewReleaseAsync()
         {
 
         }
