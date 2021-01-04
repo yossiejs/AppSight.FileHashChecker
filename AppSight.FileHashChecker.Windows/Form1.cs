@@ -73,7 +73,7 @@ namespace AppSight.FileHashChecker.Windows
             ShowInTaskbar = false;
         }
 
-        private async void HasNewRelease()
+        private async void IsAvailableNewRelease()
         {
 
         }
