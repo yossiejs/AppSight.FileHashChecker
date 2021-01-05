@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Resources;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AppSight.Extensions.System;
 using AppSight.FileHashChecker.Library.Command;
+using AppSight.FileHashChecker.Library.Net.GitHub;
+using AppSight.FileHashChecker.Library.Net.Releases;
 using AppSight.Security.Cryptography;
 
 namespace AppSight.FileHashChecker.Windows
@@ -22,19 +25,21 @@ namespace AppSight.FileHashChecker.Windows
         private CommandArgumentsParser _commandArgumentsParser { get; }
         private FileHashCalculator _fileHashCalculator { get; }
         private HttpClient _httpClient { get; }
-        private IGitHubRepositoryReleaseProvider _gitHubRepositoryReleaseProvider { get; }
+        private IUpdateManager _updateManager { get; }
 
         public Form1(
             CommandArgumentsParser commandArgumentsParser,
             FileHashCalculator fileHashCaluculator,
-            IGitHubRepositoryReleaseProvider gitHubRepositoryReleaseProvider)
+            IUpdateManager updateManager)
         {
             _commandArgumentsParser = commandArgumentsParser ?? throw new ArgumentNullException(nameof(commandArgumentsParser));
             _fileHashCalculator = fileHashCaluculator ?? throw new ArgumentNullException(nameof(fileHashCaluculator));
-            _gitHubRepositoryReleaseProvider = gitHubRepositoryReleaseProvider ?? throw new ArgumentNullException(nameof(gitHubRepositoryReleaseProvider));
+            _updateManager = updateManager ?? throw new ArgumentNullException(nameof(updateManager));
             // for debugging localization
             // Thread.CurrentThread.CurrentUICulture = new CultureInfo("ja-JP");
             InitializeComponent();
+
+            _updateManager.UpdateFound += new EventHandler<UpdateFoundEventArgs>(HandleUpdateFound);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -70,6 +75,8 @@ namespace AppSight.FileHashChecker.Windows
                     MessageBoxIcon.Information);
             }
 
+            _updateManager.CheckUpdatesAsync().GetAwaiter().GetResult();
+
             Application.Exit();
         }
 
@@ -79,9 +86,13 @@ namespace AppSight.FileHashChecker.Windows
             ShowInTaskbar = false;
         }
 
-        private async Task<bool> IsAvailableNewReleaseAsync()
+        private void HandleUpdateFound(object sender, UpdateFoundEventArgs args)
         {
-
+            var dialogResult = MessageBox.Show(
+                $"New version {args.Version} has been found! Upgrade now?",
+                Text,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information);
         }
     }
 }
