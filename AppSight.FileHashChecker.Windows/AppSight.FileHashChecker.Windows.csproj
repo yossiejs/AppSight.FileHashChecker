@@ -10,7 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AppSight.AutoUpdate" Version="1.0.0" />
     <PackageReference Include="AppSight.Extensions.System" Version="1.0.0" />
+    <PackageReference Include="AppSight.Net.GitHub" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

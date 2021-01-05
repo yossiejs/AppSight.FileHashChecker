@@ -123,4 +123,7 @@
   <data name="CopiedMessage" xml:space="preserve">
     <value>ハッシュ値をクリップボードにコピーしました</value>
   </data>
+  <data name="UpdateFoundMessageFormat" xml:space="preserve">
+    <value>新しいバージョン{0}が見つかりました。アップグレード情報を確認しますか？</value>
+  </data>
 </root>

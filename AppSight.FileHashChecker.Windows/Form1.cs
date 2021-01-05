@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Resources;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AppSight.AutoUpdate;
 using AppSight.Extensions.System;
 using AppSight.FileHashChecker.Library.Command;
-using AppSight.FileHashChecker.Library.Net.GitHub;
-using AppSight.FileHashChecker.Library.Net.Releases;
 using AppSight.Security.Cryptography;
 
 namespace AppSight.FileHashChecker.Windows
@@ -26,6 +28,7 @@ namespace AppSight.FileHashChecker.Windows
         private FileHashCalculator _fileHashCalculator { get; }
         private HttpClient _httpClient { get; }
         private IUpdateManager _updateManager { get; }
+        private ResourceManager _resourceManager { get; }
 
         public Form1(
             CommandArgumentsParser commandArgumentsParser,
@@ -40,15 +43,16 @@ namespace AppSight.FileHashChecker.Windows
             InitializeComponent();
 
             _updateManager.UpdateFound += new EventHandler<UpdateFoundEventArgs>(HandleUpdateFound);
+            _resourceManager = new ResourceManager(typeof(Form1));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             Minimize();
             Text = $"{Application.ProductName} {Application.ProductVersion}";
             var args = Environment.GetCommandLineArgs();
             var commandArguments = _commandArgumentsParser.Parse(args);
-            var resourceManager = new ResourceManager(typeof(Form1));
+            
 
             var fileHash = _fileHashCalculator.Calculate(
                 commandArguments.Options.FilePath,
@@ -58,7 +62,7 @@ namespace AppSight.FileHashChecker.Windows
                 .Replace("%HashType%", fileHash.HashType.ToString())
                 .Replace("%HashString%", fileHashString)
                 .Replace("%FilePath%", fileHash.Path)
-                .Replace("%Message%", resourceManager.GetString("ComputedHashMessage"));
+                .Replace("%Message%", _resourceManager.GetString("ComputedHashMessage"));
             var dialogResult = MessageBox.Show(
                 resultMessageBody,
                 Text,
@@ -69,13 +73,13 @@ namespace AppSight.FileHashChecker.Windows
             {
                 Clipboard.SetData(DataFormats.Text, fileHashString);
                 MessageBox.Show(
-                    resourceManager.GetString("CopiedMessage"),
+                    _resourceManager.GetString("CopiedMessage"),
                     Text,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
 
-            _updateManager.CheckUpdatesAsync().GetAwaiter().GetResult();
+            await _updateManager.CheckForUpdatesAsync();
 
             Application.Exit();
         }
@@ -89,10 +93,21 @@ namespace AppSight.FileHashChecker.Windows
         private void HandleUpdateFound(object sender, UpdateFoundEventArgs args)
         {
             var dialogResult = MessageBox.Show(
-                $"New version {args.Version} has been found! Upgrade now?",
+                string.Format(_resourceManager.GetString("UpdateFoundMessageFormat"), args.Version),
                 Text,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Information);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = args.Uri,
+                    UseShellExecute = true,
+                    ErrorDialog = true,
+                };
+                Process.Start(processStartInfo);
+            }
         }
     }
 }

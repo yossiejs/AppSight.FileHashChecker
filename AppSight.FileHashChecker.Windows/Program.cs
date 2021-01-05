@@ -1,10 +1,9 @@
 using System;
 using System.Net.Http;
 using System.Windows.Forms;
+using AppSight.AutoUpdate;
 using AppSight.FileHashChecker.Library.Command;
-using AppSight.FileHashChecker.Library.Net.GitHub;
-using AppSight.FileHashChecker.Library.Net.GitHub.Repositories;
-using AppSight.FileHashChecker.Library.Net.Releases;
+using AppSight.Net.GitHub.Repositories;
 using AppSight.Security.Cryptography;
 
 namespace AppSight.FileHashChecker.Windows
