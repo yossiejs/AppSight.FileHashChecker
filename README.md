@@ -7,8 +7,5 @@ This project is utility for checking file hash. Main use case is to check file h
 - SHA-256
 - SHA-512
 
-## Support environments
-- Windows 10
-
 ## Releases
 https://github.com/yossiejs/AppSight.FileHashChecker/releases
